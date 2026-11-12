@@ -47,7 +47,6 @@ public class ShAnalyzerFactory extends FileAnalyzerFactory {
         "P5",
         "AWK",
         "GMK",
-        "MK",
         "CONF",
         "COM",
         "SPEC",

@@ -95,6 +95,7 @@ import org.opengrok.indexer.analysis.pascal.PascalAnalyzerFactory;
 import org.opengrok.indexer.analysis.perl.PerlAnalyzerFactory;
 import org.opengrok.indexer.analysis.php.PhpAnalyzerFactory;
 import org.opengrok.indexer.analysis.plain.PlainAnalyzerFactory;
+import org.opengrok.indexer.analysis.plain.ExtensionTextAnalyzerFactory;
 import org.opengrok.indexer.analysis.plain.XMLAnalyzerFactory;
 import org.opengrok.indexer.analysis.powershell.PowershellAnalyzerFactory;
 import org.opengrok.indexer.analysis.python.PythonAnalyzerFactory;
@@ -278,6 +279,10 @@ public class AnalyzerGuru {
                 new CxxAnalyzerFactory(),
                 new ErlangAnalyzerFactory(),
                 new ShAnalyzerFactory(),
+                new ExtensionTextAnalyzerFactory("Blueprint (.bp)", "blueprint", "BP"),
+                new ExtensionTextAnalyzerFactory("Makefile (.mk)", "makefile", "MK"),
+                new ExtensionTextAnalyzerFactory("Fidl (.fidl)", "fidl", "FIDL"),
+                new ExtensionTextAnalyzerFactory("Fdepl (.fdepl)", "fdepl", "FDEPL"),
                 new PowershellAnalyzerFactory(),
                 new UuencodeAnalyzerFactory(),
                 new GZIPAnalyzerFactory(),
@@ -347,7 +352,7 @@ public class AnalyzerGuru {
      * {@link FileAnalyzerFactory} subclasses are revised to target more or
      * different files.
      * @return a value whose lower 32-bits are a static value
-     * 20260504_00
+    * 20261112_00
      * for the current implementation and whose higher-32 bits are non-zero if
      * {@link #addExtension(java.lang.String, AnalyzerFactory)}
      * or
@@ -355,7 +360,7 @@ public class AnalyzerGuru {
      * has been called.
      */
     public static long getVersionNo() {
-        final int ver32 = 20260504_00; // Edit comment above too!
+        final int ver32 = 20261112_00; // Edit comment above too!
         long ver = ver32;
         if (customizationHashCode != 0) {
             ver |= (long) customizationHashCode << 32;

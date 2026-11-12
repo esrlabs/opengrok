@@ -66,6 +66,21 @@ class AnalyzerGuruTest {
     void testGetFileTypeDescriptions() {
         Map<String, String> map = AnalyzerGuru.getfileTypeDescriptions();
         assertFalse(map.isEmpty());
+        assertEquals("Blueprint (.bp)", map.get("blueprint"));
+        assertEquals("Makefile (.mk)", map.get("makefile"));
+        assertEquals("Fidl (.fidl)", map.get("fidl"));
+        assertEquals("Fdepl (.fdepl)", map.get("fdepl"));
+    }
+
+    @Test
+    void testExtensionSpecificPlainTextTypes() throws Exception {
+        for (String extension : new String[]{"bp", "mk", "fidl", "fdepl"}) {
+            ByteArrayInputStream in = new ByteArrayInputStream("plain text".getBytes(StandardCharsets.UTF_8));
+            AbstractAnalyzer analyzer = AnalyzerGuru.getAnalyzer(in, "/dummy/file." + extension);
+            assertEquals(extension.equals("bp") ? "blueprint"
+                    : extension.equals("mk") ? "makefile"
+                    : extension.equals("fdepl") ? "fdepl" : "fidl", analyzer.getFileTypeName());
+        }
     }
 
     /**

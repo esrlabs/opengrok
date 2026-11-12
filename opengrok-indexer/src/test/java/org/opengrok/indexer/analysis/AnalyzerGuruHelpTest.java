@@ -37,5 +37,9 @@ class AnalyzerGuruHelpTest {
         assertFalse(usage.isEmpty(), "usage is not empty");
         assertTrue(usage.contains("*."), "usage contains \"*.\"");
         assertTrue(usage.contains("#!"), "usage contains \"#!\"");
+        assertTrue(usage.contains("ExtensionText : Blueprint (.bp)"));
+        assertTrue(usage.contains("ExtensionText : Makefile (.mk)"));
+        assertTrue(usage.contains("ExtensionText : Fidl (.fidl)"));
+        assertTrue(usage.contains("ExtensionText : Fdepl (.fdepl)"));
     }
 }

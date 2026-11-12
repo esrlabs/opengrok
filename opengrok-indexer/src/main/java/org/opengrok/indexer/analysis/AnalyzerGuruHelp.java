@@ -54,12 +54,13 @@ public class AnalyzerGuruHelp {
         b.append("List of analyzers:" + System.lineSeparator());
         b.append("The names of the analyzers (left column) can be used for the -A indexer option:" +
                 System.lineSeparator() + System.lineSeparator());
-        byFactory(AnalyzerGuru.getAnalyzerFactories().stream().
-                collect(Collectors.toMap(f -> f.getClass().getSimpleName(), f -> f))).
-                forEach(factory ->
+        AnalyzerGuru.getAnalyzerFactories().stream()
+                .sorted(Comparator.comparing((AnalyzerFactory f) -> reportable(f), String.CASE_INSENSITIVE_ORDER)
+                        .thenComparing(f -> f.getClass().getSimpleName(), String.CASE_INSENSITIVE_ORDER))
+                .forEach(factory ->
             b.append(String.format("%-10s : %s%n",
-                    factory.fac.getClass().getSimpleName().replace("AnalyzerFactory", ""),
-                    factory.fac.getName() != null ? factory.fac.getName() : "N/A"))
+                    factory.getClass().getSimpleName().replace("AnalyzerFactory", ""),
+                    factory.getName() != null ? factory.getName() : "N/A"))
         );
 
         b.append(System.lineSeparator() + "AnalyzerGuru prefixes:" + System.lineSeparator());
